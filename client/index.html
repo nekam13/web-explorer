@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Czech Web Explorer</title>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="icon" href="/assets/logo.svg">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <img src="/assets/logo.svg" alt="" width="32" height="32">
+    <h1>Czech Web Explorer</h1>
+  </div>
+  <nav>
+    <a href="#dashboard" data-nav>Dashboard</a>
+    <a href="#search" data-nav>Hledání</a>
+    <a href="#graph" data-nav>Graf</a>
+    <a href="#domains" data-nav>Domény</a>
+    <a href="#queue" data-nav>Fronta</a>
+  </nav>
+</header>
+
+<main>
+  <section id="dashboard" class="panel">
+    <h2>Dashboard</h2>
+    <div class="stats" id="stats">
+      <div class="stat"><span class="num" id="st-domains">–</span><span class="lbl">Domény</span></div>
+      <div class="stat"><span class="num" id="st-pages">–</span><span class="lbl">Stránky</span></div>
+      <div class="stat"><span class="num" id="st-words">–</span><span class="lbl">Slov</span></div>
+      <div class="stat"><span class="num" id="st-errors">–</span><span class="lbl">Chyby</span></div>
+    </div>
+    <form id="crawl-form" class="crawl-form">
+      <input type="url" id="crawl-url" placeholder="https://example.cz" required>
+      <button type="submit">Přidat ke crawlování</button>
+    </form>
+    <p class="hint">Etický crawler: respektuje robots.txt a rychlostní limity.</p>
+  </section>
+
+  <section id="search" class="panel">
+    <h2>Fulltextové hledání</h2>
+    <form id="search-form" class="crawl-form">
+      <input type="search" id="search-q" placeholder="např. linux" autocomplete="off">
+      <button type="submit">Hledat</button>
+    </form>
+    <ol id="search-results" class="results"></ol>
+  </section>
+
+  <section id="graph" class="panel">
+    <h2>Vztahy mezi stránkami</h2>
+    <p class="hint">Interní odkazy mezi indexovanými stránkami. (Fáze 4 přidá D3 vizualizaci.)</p>
+    <div id="graph-list" class="graph-list"></div>
+  </section>
+
+  <section id="domains" class="panel">
+    <h2>Domény</h2>
+    <table class="table">
+      <thead><tr><th>Doména</th><th>Stav</th><th>Robots</th><th>Sitemap</th><th>Naposledy</th></tr></thead>
+      <tbody id="domains-body"></tbody>
+    </table>
+  </section>
+
+  <section id="queue" class="panel">
+    <h2>Fronta</h2>
+    <table class="table">
+      <thead><tr><th>URL</th><th>Zdroj</th><th>Stav</th><th>Chyba</th></tr></thead>
+      <tbody id="queue-body"></tbody>
+    </table>
+  </section>
+</main>
+
+<script src="/js/app.js"></script>
+</body>
+</html>

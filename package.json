@@ -1,0 +1,26 @@
+{
+  "name": "czech-web-explorer",
+  "version": "0.1.0",
+  "description": "Etický, kurátorovaný český webový prohlížeč a indexátor",
+  "type": "module",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node server/server.js",
+    "test": "node test/smoke.js",
+    "playwright:install": "playwright install chromium"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@fastify/static": "^8.0.0",
+    "better-sqlite3": "^11.10.0",
+    "cheerio": "^1.0.0",
+    "fastify": "^5.0.0",
+    "playwright": "^1.49.0"
+  },
+  "optionalDependencies": {
+    "jsdom": "^25.0.0"
+  }
+}
