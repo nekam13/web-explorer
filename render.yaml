@@ -1,0 +1,21 @@
+# Render.com blueprint — free tier web service.
+services:
+  - type: web
+    name: czech-web-explorer
+    runtime: node
+    plan: free
+    buildCommand: npm ci --omit=dev && npx playwright install --with-deps chromium
+    startCommand: node server/server.js
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: HOST
+        value: 0.0.0.0
+      - key: PORT
+        value: 3000
+      - key: DATA_DIR
+        value: /opt/render/project/src/data
+    disk:
+      name: data
+      mountPath: /opt/render/project/src/data
+      sizeGB: 1

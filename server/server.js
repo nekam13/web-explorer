@@ -9,8 +9,10 @@ import { registerStatsRoutes } from './routes/stats.js';
 import { registerPageRoutes } from './routes/page.js';
 import { registerSearchRoutes } from './routes/search.js';
 import { registerGraphRoutes } from './routes/graph.js';
+import { registerExportRoutes } from './routes/export.js';
 import { db, DATA_DIR } from './db/db.js';
 import { startCrawlerLoop, stopCrawler } from './crawler/index.js';
+import { startScheduler, stopScheduler, getSchedulerStatus } from './scheduler/cron.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -39,6 +41,9 @@ app.register(registerStatsRoutes);
 app.register(registerPageRoutes);
 app.register(registerSearchRoutes);
 app.register(registerGraphRoutes);
+app.register(registerExportRoutes);
+
+app.get('/api/scheduler/status', async () => getSchedulerStatus());
 
 app.get('/api/health', async () => {
   return {
@@ -51,11 +56,13 @@ app.get('/api/health', async () => {
 app.listen({ host, port }).then(async () => {
   app.log.info('Czech Web Explorer na portu ' + port);
   startCrawlerLoop().catch(err => console.error(err));
+  startScheduler();
 });
 
 const shutdown = async () => {
   app.log.info('Ukoncuji...');
   await stopCrawler();
+  await stopScheduler();
   await app.close();
   db.close();
   process.exit(0);

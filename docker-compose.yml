@@ -1,0 +1,16 @@
+services:
+  web-explorer:
+    build: .
+    container_name: czech-web-explorer
+    ports:
+      - "3000:3000"
+    environment:
+      HOST: "0.0.0.0"
+      PORT: "3000"
+      DATA_DIR: "/app/data"
+    volumes:
+      - cwe-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  cwe-data:

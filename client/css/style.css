@@ -37,4 +37,7 @@ main { max-width: 960px; margin: 0 auto; padding: 1rem; }
 .message.ok { background: #e7f6ec; }
 .message.err { background: #fdecec; color: var(--danger); }
 nav a.active { text-decoration: underline; }
+.export-links { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.5rem; }
+.export-links a { padding: 0.4rem 0.9rem; border:  1px solid var(--border); border-radius: 8px; background: #fff; text-decoration: none; font-size: 0.85rem; color: var(--text); }
+.export-links a:hover { border-color: var(--accent); color: var(--accent); }
 @media (max-width: 600px) { .topbar { flex-direction: column; align-items: flex-start; } }

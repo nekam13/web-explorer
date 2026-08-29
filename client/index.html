@@ -41,7 +41,8 @@
   <section id="search" class="panel">
     <h2>Fulltextové hledání</h2>
     <form id="search-form" class="crawl-form">
-      <input type="search" id="search-q" placeholder="např. linux" autocomplete="off">
+      <input type="search" id="search-q" placeholder="např. linux" autocomplete="off" list="search-options">
+      <datalist id="search-options"></datalist>
       <button type="submit">Hledat</button>
     </form>
     <ol id="search-results" class="results"></ol>
@@ -71,6 +72,19 @@
       <thead><tr><th>URL</th><th>Zdroj</th><th>Stav</th><th>Chyba</th></tr></thead>
       <tbody id="queue-body"></tbody>
     </table>
+  </section>
+
+  <section id="export" class="panel">
+    <h2>Export dat</h2>
+    <p class="hint">Stáhni indexovaná data — JSON, CSV nebo GEXF (pro Gephi).</p>
+    <div class="export-links">
+      <a href="/api/export/pages.json" download>Stránky JSON</a>
+      <a href="/api/export/pages.csv" download>Stránky CSV</a>
+      <a href="/api/export/domains.json" download>Domény JSON</a>
+      <a href="/api/export/domains.csv" download>Domény CSV</a>
+      <a href="/api/export/graph.json" download>Graf JSON</a>
+      <a href="/api/export/graph.gexf" download>Graf GEXF</a>
+    </div>
   </section>
 </main>
 

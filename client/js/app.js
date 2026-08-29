@@ -112,7 +112,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  $('#search-form').addEventListener('submit', (e) => {
+  // Autocomplete: debounce 300 ms — naplni datalist návrhy titulku.
+let suggestTimer = null;
+$('#search-q').addEventListener('input', (e) => {
+  clearTimeout(suggestTimer);
+  const q = e.target.value.trim();
+  if (!q) { $('#search-options').innerHTML = ''; return; }
+  suggestTimer = setTimeout(async () => {
+    try {
+      const d = await api('/search/suggest?q=' + encodeURIComponent(q));
+      $('#search-options').innerHTML = (d.suggestions || []).map(s => `<option value="${esc(s)}">`).join('');
+    } catch (_) { /* tise */ }
+  }, 300);
+});
+
+$('#search-form').addEventListener('submit', (e) => {
     e.preventDefault();
     const q = $('#search-q').value.trim();
     if (q) runSearch(q);
