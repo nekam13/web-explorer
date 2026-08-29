@@ -58,11 +58,9 @@ async function loadQueue() {
 }
 
 async function loadGraph() {
-  try {
-    const g = await api('/graph');
-    $('#graph-list').innerHTML = (g.nodes || []).map(n => `<a href="${esc(n.url)}" target="_blank" rel="noopener">${esc(new URL(n.url).pathname || n.url)}</a>`).join('') || '<p class="hint">Zatím žádné uzly.</p>';
-  } catch (e) {
-    console.error(e);
+  // Graf inicializuje graph-viz.js (inicializace po nacteni DOMu).
+  if (typeof window.initGraphViz === 'function') {
+    await window.initGraphViz();
   }
 }
 

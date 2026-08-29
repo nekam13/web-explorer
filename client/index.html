@@ -49,8 +49,12 @@
 
   <section id="graph" class="panel">
     <h2>Vztahy mezi stránkami</h2>
-    <p class="hint">Interní odkazy mezi indexovanými stránkami. (Fáze 4 přidá D3 vizualizaci.)</p>
-    <div id="graph-list" class="graph-list"></div>
+    <p class="hint">Force-directed graf — uzel = stránka (velikost dle počtu slov,, barva dle domény).</p>
+    <div id="graph-controls">
+      <button type="button" id="graph-reset">Reset zoom</button>
+      <label><input type="checkbox" id="graph-labels" checked> Zobrazit štítky</label>
+    </div>
+    <div id="graph-viz" role="img" aria-label="Graf vztahů mezi stránkami"></div>
   </section>
 
   <section id="domains" class="panel">
@@ -70,6 +74,8 @@
   </section>
 </main>
 
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="/js/graph-viz.js"></script>
 <script src="/js/app.js"></script>
 </body>
 </html>

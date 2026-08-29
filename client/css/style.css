@@ -28,8 +28,11 @@ main { max-width: 960px; margin: 0 auto; padding: 1rem; }
 .badge { display: inline-block; padding: 0.1rem 0.5rem; border-radius: 999px; font-size: 0.75rem; }
 .badge.ok { background: #e7f6ec; color: var(--accent); }
 .badge.bad { background: #fdecec; color: var(--danger); }
-.graph-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-.graph-list a { font-size: 0.8rem; color: var(--accent); text-decoration: none; padding: 0.25rem 0.6rem; border:  1px solid var(--border); border-radius: 999px; }
+.graph-controls { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin-bottom: 0.5rem; font-size: 0.85rem; }
+.graph-controls button { padding: 0.3rem 0.8rem; border:  1px solid var(--border); background: #fff; border-radius: 6px; cursor: pointer; font-size: 0.85rem; }
+.graph-controls label { display: flex; align-items: center; gap: 0.35rem; cursor: pointer; color: var(--muted); }
+#graph-viz { width: 100%; height: 64vh; min-height: 420px; border:  1px solid var(--border); border-radius: 10px; overflow: hidden; position: relative; }
+#graph-viz svg { height: 100%; }
 .message { padding: 0.5rem 1rem; margin: 0.5rem 0; border-radius: 6px; }
 .message.ok { background: #e7f6ec; }
 .message.err { background: #fdecec; color: var(--danger); }
