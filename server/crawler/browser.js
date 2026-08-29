@@ -6,22 +6,31 @@ let playwrightInst;
 let browserInst;
 let jsdomWarned;
 
+function warnFallbackOnce() {
+  if (!jsdomWarned) {
+    jsdomWarned = true;
+    console.warn('[browser] Playwright neni k dispozici, pouzivam JSDOM fallback.');
+  }
+}
+
 export async function getBrowser() {
   if (browserInst) {
     return browserInst;
   }
+  // Dynamicky import — v ESM nelze pouzit require().
   try {
-    const pw = require('playwright');
+    const pw = await import('playwright');
     if (!browserInst) {
       browserInst = await pw.chromium.launch({
-        headless: false,
+        headless: true,
         args: ['--no-sandbox', '--disable-dev-shm-usage'],
       });
     }
     playwrightInst = pw;
     return browserInst;
   } catch (err) {
-    console.warn('[browser] Playwright neni k dispozici, pouzivam JSDOM fallback.');
+    // Playwright nemusi byt nainstalovan ci dostupny — tise prepneme na JSDOM (varovani jen jednou)
+    warnFallbackOnce();
     return null;
   }
 }
@@ -34,15 +43,9 @@ export async function closeBrowser() {
 }
 
 export function isPlaywrightAvailable() {
-  return !!browserInst || (() => {
-    try {
-      require.resolve('playwright');
-      return true;
-    } catch (e) {
-      return false;
-    }
-  })();
+  return !!browserInst;
 }
+
 
 function buildDom(html, url) {
   if (typeof DOMParser === 'undefined') {

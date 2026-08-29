@@ -149,9 +149,9 @@ export function parsePage(html, url, extra) {
     const anchorText = normalizeSpace(a.textContent);
     const anchor = anchorText.slice(0, 200);
     if (isInternal(abs, domain)) {
-      links.push({ url: abs, type: 'internal', anchor: anchor });
+      links.push({ url: abs, type: 'internal', anchorText: anchor });
     } else {
-      links.push({ url: abs, type: 'external', anchor: anchor });
+      links.push({ url: abs, type: 'external', anchorText: anchor });
     }
   }
 
@@ -190,7 +190,7 @@ export function parsePage(html, url, extra) {
     } else {
       ty = 'external';
     }
-    edges.push({ url: l.url, type: ty, anchor: l.anchor });
+    edges.push({ url: l.url, type: ty, anchorText: l.anchorText });
   }
 
   const internalUrls = [];

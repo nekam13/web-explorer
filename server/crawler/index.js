@@ -109,7 +109,6 @@ async function crawlOne(queueItem_) {
     linksInternal: parsed.linksInternal,
     linksExternal: parsed.linksExternal,
     wordCount: parsed.wordCount,
-    wordCount: parsed.wordCount,
     crawlDepth: depth,
     crawlStatus: 'indexed',
     priority: pickPriorityFor(parsed.url),
@@ -178,7 +177,7 @@ export async function runQueueOnce() {
     await crawlOne(item);
   } catch (err_) {
     console.error('[crawler] chyba:', err_.message || err_);
-    markQueueFailed(item_.id, String(err_.message || err_));
+    markQueueFailed(item.id, String(err_.message || err_));
   }
   return  1;
 }
